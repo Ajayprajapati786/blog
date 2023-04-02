@@ -1,8 +1,12 @@
 import React, { useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/auth";
 
 const Login = () => {
+    const dispatch = useDispatch();
+
   const loginIdRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -18,6 +22,8 @@ const Login = () => {
        for (const key in obj) {
         if (obj[key].email === email) {
           console.log( obj[key].role);
+          const role = (obj[key].role);
+          localStorage.setItem("role",role);
         }
       }
     })
@@ -50,6 +56,8 @@ const Login = () => {
           data
         );
         getRole(response.data.email);
+        console.log(data);
+        dispatch(authActions.login({token:response.data.idToken, email:response.data.email}));
         console.log("success");
       } catch (error) {
         alert(error.response.data.error.message);

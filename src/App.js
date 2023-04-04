@@ -37,11 +37,13 @@ function App() {
 
         <Route path="/createpost">
           {isAuthenticated&&(role=='admin' || role=='author')&&(<CreatePost />)}
-          {isAuthenticated&&(role!='admin' || role!='author')&&(<Message/>)}  
+          {isAuthenticated&&(role!='admin' && role!='author')&&(<Message/>)}  
         </Route>
 
         <Route path="/editpost">
-          <EditPost/>
+          
+          {isAuthenticated&&(role=='admin' || role=='author')&&(<EditPost/>)}
+          {isAuthenticated&&(role!='admin' && role!='author')&&(<Message/>)} 
         </Route>
       </Switch>
     </div>

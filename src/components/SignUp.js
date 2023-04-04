@@ -2,8 +2,12 @@ import React, { useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+
 
 const Signup = () => {
+  const history = useHistory();
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -56,6 +60,9 @@ const Signup = () => {
         .then((response) => {
           console.log(response.data);
           // Handle successful sign up
+          alert("Account created succesfully");
+        history.push("/login");
+
         })
         .catch((error) => {
           console.log(error);

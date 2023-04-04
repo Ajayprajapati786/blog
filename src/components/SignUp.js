@@ -88,7 +88,7 @@ const Signup = () => {
         <Form.Group controlId="formUserType">
   <Form.Label>User Type</Form.Label>
   <Form.Control as="select" ref={userTypeRef}>
-    <option value="admin">Admin</option>
+    <option value="admin" disabled>Admin</option>
     <option value="author">Author</option>
     <option value="reader">Reader</option>
   </Form.Control>

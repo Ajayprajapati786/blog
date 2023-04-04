@@ -26,6 +26,10 @@ const initialAuthState = {
         state.isAuthenticated = false;
         localStorage.setItem("isAuthenticated", false);
       },
+      role: (state,action)=>{
+        state.role = action.payload.role;
+        localStorage.setItem("role",action.payload.role)
+      }
     },
   });
 

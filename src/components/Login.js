@@ -3,9 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
+import { useHistory } from "react-router-dom";
+
 
 const Login = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+
 
   const loginIdRef = useRef(null);
   const passwordRef = useRef(null);
@@ -21,11 +25,16 @@ const Login = () => {
        const obj = response.data;
        for (const key in obj) {
         if (obj[key].email === email) {
-          console.log( obj[key].role);
-          const role = (obj[key].role);
-          localStorage.setItem("role",role);
+          console.log(obj[key].role);
+          const role = obj[key].role;
+          if (role !== undefined && role !== null) {
+            const roleString = role.toString();
+            // localStorage.setItem("rolettttttttt", roleString);
+            dispatch(authActions.role({role:roleString}));
+          }
         }
       }
+      
     })
     .catch((error) => {
       console.log(error);
@@ -58,6 +67,8 @@ const Login = () => {
         getRole(response.data.email);
         console.log(data);
         dispatch(authActions.login({token:response.data.idToken, email:response.data.email}));
+      
+        history.push("/");
         console.log("success");
       } catch (error) {
         alert(error.response.data.error.message);

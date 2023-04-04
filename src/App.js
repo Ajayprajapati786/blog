@@ -28,7 +28,6 @@ function App() {
         </Route>
         <Route path="/posts/:postId">
           {" "}
-          {/* Define the dynamic route parameter */}
           <PostDetails />
         </Route>
         <Route path="/signup">
@@ -41,7 +40,6 @@ function App() {
         </Route>
 
         <Route path="/editpost">
-          
           {isAuthenticated&&(role=='admin' || role=='author')&&(<EditPost/>)}
           {isAuthenticated&&(role!='admin' && role!='author')&&(<Message/>)} 
         </Route>

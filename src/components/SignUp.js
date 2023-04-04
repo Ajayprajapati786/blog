@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 
 const Signup = () => {
   const history = useHistory();
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -66,8 +65,9 @@ const Signup = () => {
         })
         .catch((error) => {
           console.log(error);
-          // Handle error
+          alert(error.response.data.error.message);
         });
+        
     }
 
     handleRole(userType,email);
